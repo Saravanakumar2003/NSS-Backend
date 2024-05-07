@@ -6,26 +6,6 @@ import { compose } from 'redux';
 import Notification from '../../../Components/Notification';
 import Slider from '../../../Components/Slider';
 
-// const  notifications = [
-//     {
-//         id:1,
-//         title: 'ESA Schedule',
-//         desc: 'ESA for Btech & Mtech scheduled from May 10th - 25th'
-//     },
-//     {
-//         id:2,
-//         title: 'Hacktomorrow',
-//         desc: 'CSE Dept. Presents Hacktomorrow'
-//     },
-//     {
-//         id:3,
-//         title: 'CultFest2021',
-//         desc: 'Inter Dept. Cultural festival'
-//     },
-
-// ]
-
-
 const Overview = ({profile, notifications}) => {
     return(
         <Container className="mt-4 mb-4">

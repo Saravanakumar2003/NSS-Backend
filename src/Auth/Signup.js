@@ -76,6 +76,23 @@ class Signup extends React.Component {
             errors["phone"] = "Please add your phone number"
         }
 
+        if (!input["branch"]) {
+            isValid = false;
+            errors["branch"] = "Please select your branch";
+        }
+
+        if (!input["type"]) {
+            isValid = false;
+            errors["type"] = "Please select your type";
+        }
+
+        if (!input["semester"] && input["type"] === "Student") {
+            isValid = false;
+            errors["semester"] = "Please select your semester";
+        }
+
+        
+
 
         this.setState({
             errors: errors

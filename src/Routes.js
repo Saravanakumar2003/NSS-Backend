@@ -8,6 +8,10 @@ export const ADMIN_ROUTES = [
         'url': '/events'
     },
     {
+        'route': 'Newsletters',
+        'url': '/newsletters'
+    },
+    {
         'route': 'Volunteers',
         'url': '/students'
     },
@@ -34,6 +38,10 @@ export const TEACHER_ROUTES = [
     {
         'route': 'Forum',
         'url': '/forum'
+    },
+    {
+        'route': 'Newsletters',
+        'url': '/newsletters'
     }
 ];
 

@@ -8,6 +8,7 @@ import CustomAlert from '../../Components/Alert';
 import Events from '../admin/pages/Events';
 import Event from '../admin/pages/Event';
 import StudentForum from '../forum/StudentForum';
+import Newsletter from './pages/Newsletter';
 
 
 
@@ -24,6 +25,7 @@ const TeacherDashboard = ({profile, auth, authSuccess}) => {
                     <Route exact path="/events" component={Events}></Route>
                     <Route exact path="/events/:event" component={Event}></Route>
                     <Route exact path="/forum" component={StudentForum}></Route>
+                    <Route exact path="/newsletters" component={Newsletter}></Route>
             </Switch>
             <Footer></Footer>
         </div>

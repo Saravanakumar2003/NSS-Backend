@@ -11,6 +11,7 @@ import Event from './pages/Event';
 import Teachers from './pages/Teachers';
 import Admins from './pages/Admins';
 import Teacher from './pages/Teacher';
+import Newsletter from '../teacher/pages/Newsletter';
 
 
 
@@ -32,6 +33,7 @@ const AdminDashboard = ({auth, upload, authSuccess}) => {
                     <Route exact path="/events" component={Events}></Route>
                     <Route exact path="/events/:event" component={Event}></Route>
                     <Route exact path="/admins" component={Admins}></Route>
+                    <Route exact path="/newsletters" component={Newsletter}></Route>
             </Switch>
             <Footer></Footer>
         </div>
