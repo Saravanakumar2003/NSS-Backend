@@ -8,7 +8,7 @@ import { deleteNewsletter } from '../../Store/actions/newsletterActions'
 
 
 
-const NewsletterCard = ({ newsletters, admin, deleteNewsletter }) => {
+const NewsletterCard = ({ newsletters, profile, deleteNewsletter }) => {
     const [isOpen, setIsOpen] = useState(false)
 
     const handleNewsletterRemoval = (newsletter) => {
@@ -17,6 +17,8 @@ const NewsletterCard = ({ newsletters, admin, deleteNewsletter }) => {
 
     const toggle = () => setIsOpen(!isOpen)
 
+    const adminorteacher = ["Admin", "Teacher"].includes(profile.userType)
+
     return (
         <React.Fragment>
             <Row md="12">
@@ -24,7 +26,7 @@ const NewsletterCard = ({ newsletters, admin, deleteNewsletter }) => {
                     <Col md='6' key={c.id}>
                         <Card className="event-card">
                             <CardBody>
-                                <CardTitle className="event-t"><strong>{c.title}</strong></CardTitle>
+                                <CardTitle className="event-t"><strong>Title: </strong>{c.title}</CardTitle>
                                 <CardSubtitle className="mb-2 subtitle"><b>Description:</b> {c.desc}</CardSubtitle>
                                 <Button color="primary" className="mr-3">
                                     <a href={c.file} className="link" target="_blank" rel="noopener noreferrer">
@@ -32,13 +34,13 @@ const NewsletterCard = ({ newsletters, admin, deleteNewsletter }) => {
                                     </a>
                                 </Button>
 
-                                {admin ? <Button onClick={toggle} color="danger"> Remove </Button> : undefined}
+                                {adminorteacher ? <Button onClick={toggle} color="danger"> Remove </Button> : undefined}
                             </CardBody>
                         </Card>
                         <CustomModal toggle={toggle} modal={isOpen} title="Remove Newsletter">
                             <Container>
                                 <h4>Are you sure?</h4>
-                                <Button color="danger" className="card-button w-25" onClick={() => handleNewsletterRemoval(c)}>Yes</Button>
+                                {adminorteacher ? <Button color="danger" className="card-button w-25" onClick={() => handleNewsletterRemoval(c)}>Yes</Button> : undefined}
                                 <Button color="primary" className="card-button w-25 ml-2 mr-2" onClick={toggle}>No</Button>
                             </Container>
                         </CustomModal>
@@ -53,6 +55,7 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         newsletters: state.firestore.ordered.newsletters,
+        profile: state.firebase.profile
     }
 }
 

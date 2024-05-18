@@ -58,5 +58,9 @@ export const STUDENT_ROUTES = [
         'route': 'Forum',
         'url': '/forum'
     },
+    {
+        'route': 'Newsletters',
+        'url': '/newsletters'
+    }
     
 ];

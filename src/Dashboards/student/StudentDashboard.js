@@ -7,6 +7,7 @@ import ErrorPage from '../../Errorpage';
 import StudentForum from '../forum/StudentForum';
 import Events from '../admin/pages/Events'
 import Event from '../admin/pages/Event'
+import Newsletter from '../teacher/pages/Newsletter';
 
 const StudentDashboard = ({profile, auth}) => {
     if(!auth.uid) return <Redirect to="/login"></Redirect>   
@@ -19,6 +20,8 @@ const StudentDashboard = ({profile, auth}) => {
                         <Route exact path="/events" component={Events}></Route>
                         <Route exact path="/events/:event" component={Event}></Route>
                         <Route exact path="/forum" component={StudentForum}></Route>
+                        <Route exact path="/newsletters" component={Newsletter}></Route>
+
                     </Switch>
             <Footer></Footer>
         </div>
