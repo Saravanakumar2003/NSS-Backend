@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router'
 import { Container } from 'reactstrap'
-import InfoContainer from '../../../Components/Info/Info';
+import InfoContainer from '../../../Components/Info/TeachersInfo';
 
 
 const Teacher = () => {
