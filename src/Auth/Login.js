@@ -1,16 +1,16 @@
-import React from 'react'
-import { Row, Col, Container, Form, FormGroup, Label, Input, Button } from 'reactstrap'
-import '../App.css'
-import { Redirect } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Row, Col, Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import '../App.css';
+import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signIn } from '../Store/actions/authActions';
-import Footer from '../Components/Footer/Footer'
-import CustomAlert from '../Components/Alert'
+import Footer from '../Components/Footer/Footer';
+import CustomAlert from '../Components/Alert';
 
 class Login extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             input: {
@@ -18,8 +18,7 @@ class Login extends React.Component {
                 password: ''
             },
             errors: {}
-        }
-
+        };
     }
 
     handleChange = (e) => {
@@ -27,23 +26,20 @@ class Login extends React.Component {
         const errors = this.state.errors;
         input[e.target.id] = e.target.value;
         errors[e.target.id] = '';
-        this.setState({ input });
-        this.setState({ errors })
-    }
+        this.setState({ input, errors });
+    };
 
     handleSubmit = (e) => {
         e.preventDefault();
         if (this.validate()) {
             this.props.signIn(this.state.input);
         }
-    }
-
+    };
 
     validate() {
         let input = this.state.input;
         let errors = {};
         let isValid = true;
-
 
         if (!input["email"]) {
             isValid = false;
@@ -57,56 +53,50 @@ class Login extends React.Component {
 
         this.setState({
             errors: errors
-        })
+        });
 
         return isValid;
     }
 
-
     render() {
         const { auth, authError } = this.props;
-        if (auth.uid) return (<Redirect to="/"></Redirect>)
+        if (auth.uid) return (<Redirect to="/"></Redirect>);
 
         return (
-            <Row>
-                <Col md="4">
-                    <div style={{
-                        backgroundImage: `url(${require('../Assets/Background.jpg')})`,
-                        backgroundSize: 'cover',
-                        filter: 'blur(10px)',
-                        width: '100%',
-                        height: '100vh'
-                    }} className="login-image" /></Col>
-                <Col md="6">
-                    <Form onSubmit={this.handleSubmit}>
-                        <Container className="signup-container">
-                            <h1 className="heading mt-5 mb-5">Login</h1>
-                            <Col>
-                                <Row md='8'>
-                                    <FormGroup>
-                                        <Label>Email</Label>
-                                        <Input type="email" name="email" id="email" placeholder="Email" onChange={this.handleChange} />
-                                        {this.state.errors.email && <p className="error">{this.state.errors.email}</p>}
-
-                                    </FormGroup>
-                                </Row>
-                                <Row md="8">
-                                    <FormGroup>
-                                        <Label>Password</Label>
-                                        <Input type="password" name="password" id="password" placeholder="Password" onChange={this.handleChange} />
-                                        {this.state.errors.password && <p className="error">{this.state.errors.password}</p>}
-                                    </FormGroup>
-                                </Row>
-                            </Col>
-                            <Button color="primary" className="login-button" type="submit">Submit</Button>
-                            <p className="login-helper">Dont have an account? <Link to="/signup">Signup</Link></p>
+            <Container fluid className="login-container">
+                <Row className="justify-content-center align-items-center vh-100">
+                    <Col md="4" sm="8" xs="10" className="login-form-container">
+                        <div className="login-logo text-center mb-4">
+                            <img src={require('../Assets/Nss.png')} alt="NSS Logo" />
+                        </div>
+                        <h2 className="text-center mb-4">LOGIN PAGE</h2>
+                        <Form onSubmit={this.handleSubmit}>
+                            <FormGroup>
+                                <Label for="email">Username</Label>
+                                <Input type="email" name="email" id="email" placeholder="Username" onChange={this.handleChange} />
+                                {this.state.errors.email && <p className="error">{this.state.errors.email}</p>}
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="password">Password</Label>
+                                <Input type="password" name="password" id="password" placeholder="Password" onChange={this.handleChange} />
+                                {this.state.errors.password && <p className="error">{this.state.errors.password}</p>}
+                            </FormGroup>
+                            <Button color="danger" className="login-button w-100" type="submit">Login</Button>
+                           
+                            <p className="text-center mt-3">
+                                Don't have an account? <Link to="/signup">Sign up</Link>
+                            </p>
+                    
+                            <p className="text-center mt-3">
+                                <Link to="/forgot-password">Forgot your password?</Link>
+                            </p>
                             {authError && <CustomAlert color="danger" alert={authError} authError></CustomAlert>}
-                        </Container>
-                    </Form>
-                </Col>
-                <Footer></Footer>
-            </Row>
-        )
+                        </Form>
+                    </Col>
+                </Row>
+                <Footer />
+            </Container>
+        );
     }
 }
 
@@ -114,13 +104,13 @@ const mapStateToProps = (state) => {
     return {
         auth: state.firebase.auth,
         authError: state.auth.authError,
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        signIn: (creds) => dispatch(signIn(creds))
-    }
-}
+        signIn: (creds) => dispatch(signIn(creds)),
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
