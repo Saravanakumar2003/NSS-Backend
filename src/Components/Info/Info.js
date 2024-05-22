@@ -33,10 +33,10 @@ const InfoContainer = ({student,setStudentSuspended, updateStudentDisplayPic}) =
         var metadata = {
             contentType: 'image/jpeg'
         }
-        const uploadImage = storage.ref(`userImages/${name}`).put(profile, metadata)
+        const uploadImage = storage.ref(`images/${name}`).put(profile, metadata)
         uploadImage.on('state_changed', 
             () => {
-                storage.ref(`userImages/${name}`).getDownloadURL().then(
+                storage.ref(`images/${name}`).getDownloadURL().then(
                     url => {
                         updateStudentDisplayPic(currentStudent,url)
                     },
@@ -56,7 +56,7 @@ const InfoContainer = ({student,setStudentSuspended, updateStudentDisplayPic}) =
                     </label>
                     <input type="file" id="profile_picture" hidden onChange={(e) => {e.preventDefault(); handleUpload(e.target.files[0], currentStudent)}}></input>
                 </button>
-                <CardImg src={currentStudent && currentStudent.img ? currentStudent.img : dummy.img} className="img rounded float-left">
+                <CardImg src={currentStudent && currentStudent.image ? currentStudent.image : dummy.image} className="img rounded float-left">
                     </CardImg>
                         <Button color='danger' className="button mt-3 mb-3" onClick={() => handleSuspend(currentStudent)}>{currentStudent.suspended ? 'Student Suspended' : 'Suspend Student'}</Button>
                         <Button color="primary" className="button mb-2" onClick={() => setIsOpen(true)}>Edit Info</Button>

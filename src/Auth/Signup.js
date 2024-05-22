@@ -18,20 +18,36 @@ class Signup extends React.Component {
                 name: '',
                 password: '',
                 branch: '',
-                type: 'Student',
+                type: '',
                 phone: '',
                 semester: '',
+                father: '',
+                mother: '',
+                dob: '',
+                address: '',
+                teampresent: '',
+                nnsid: '',
+                bg: '',
+                image: '',
+                gender: ''
             },
             errors: {}
         };
     }
 
+    
     handleChange = (e) => {
         const input = this.state.input;
         const errors = this.state.errors;
         input[e.target.name] = e.target.value.trim();
         errors[e.target.name] = '';
         this.setState({ input, errors });
+    };
+
+    handleImageChange = (e) => {
+        const input = this.state.input;
+        input['image'] = e.target.files[0];
+        this.setState({ input });
     };
 
     handleSubmit = (e) => {
@@ -89,13 +105,53 @@ class Signup extends React.Component {
             errors["semester"] = "Please select your semester";
         }
 
+        if (!input["father"] && input["type"] === "Student") {
+            isValid = false;
+            errors["father"] = "Please enter your father's name";
+        }
+
+        if (!input["mother"] && input["type"] === "Student") {
+            isValid = false;
+            errors["mother"] = "Please enter your mother's name";
+        }
+
+        if (!input["dob"] && input["type"] === "Student") {
+            isValid = false;
+            errors["dob"] = "Please enter your date of birth";
+        }
+
+        if (!input["address"] && input["type"] === "Student") {
+            isValid = false;
+            errors["address"] = "Please enter your address";
+        }
+
+        if (!input["teampresent"] && input["type"] === "Student") {
+            isValid = false;
+            errors["teampresent"] = "Please enter your team present";
+        }
+
+        if (!input["nnsid"] && input["type"] === "Student") {
+            isValid = false;
+            errors["nnsid"] = "Please enter your NSS ID";
+        }
+
+        if (!input["bg"] && input["type"] === "Student") {
+            isValid = false;
+            errors["bg"] = "Please enter your blood group";
+        }
+
+        if (!input["image"] && input["type"] === "Student") {
+            isValid = false;
+            errors["image"] = "Please upload your image";
+        }
+
         this.setState({ errors });
 
         return isValid;
     };
 
     render() {
-        const { auth, authError, branches, semesters } = this.props;
+        const { auth, authError } = this.props;
         if (auth.uid) return (<Redirect to="/" />);
 
         return (
@@ -129,11 +185,21 @@ class Signup extends React.Component {
                                     {this.state.errors.phone && <p className="error">{this.state.errors.phone}</p>}
                                 </FormGroup>
                                 <FormGroup>
+                                    <Label for="gender">Gender</Label>
+                                    <Input type="select" name="gender" id="gender" onChange={this.handleChange}>
+                                        <option value="">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Prefer not say</option>
+                                    </Input>
+                                    {this.state.errors.gender && <p className="error">{this.state.errors.gender}</p>}
+                                </FormGroup>
+                                <FormGroup>
                                     <Label for="branch">Select Your Branch</Label>
                                     <Input type="select" name="branch" id="branch" onChange={this.handleChange}>
                                         <option value="">Select Branch</option>
                                         {
-                                            ["ECE", "CSE", "IT", "MECH", "EEE", "AI&DS", "CIVIL", "EIE", "CYBER", "AUTO"]
+                                            ["ECE", "CSE", "IT", "MECH", "EEE", "AI&DS", "CIVIL", "EIE", "CYBER", "AUTO", "Faculty"]
                                                 .map(branch => (
                                                     <option key={branch} value={branch}>{branch}</option>
                                                 ))
@@ -142,7 +208,8 @@ class Signup extends React.Component {
                                     {this.state.errors.branch && <p className="error">{this.state.errors.branch}</p>}
                                 </FormGroup>
                                 <Row form>
-                                    <Col md={6}>
+                                    <Label for="type">Select Account Type</Label>
+                                    <Col md="12">
                                         <FormGroup check>
                                             <Input type="radio" name="type" value="Student" id="student" onChange={this.handleChange} />
                                             <Label check for="student">
@@ -150,7 +217,7 @@ class Signup extends React.Component {
                                             </Label>
                                         </FormGroup>
                                     </Col>
-                                    <Col md={6}>
+                                    <Col md="12">
                                         <FormGroup check>
                                             <Input type="radio" name="type" value="Teacher" id="teacher" onChange={this.handleChange} />
                                             <Label check for="teacher">
@@ -159,20 +226,70 @@ class Signup extends React.Component {
                                         </FormGroup>
                                     </Col>
                                 </Row>
+
                                 {this.state.input.type === "Teacher" ? '' : (
-                                    <FormGroup>
+                                    <><FormGroup>
                                         <Label for="semester">Select Your Year</Label>
                                         <Input type="select" name="semester" id="semester" onChange={this.handleChange}>
                                             <option value="">Select Year</option>
-                                            {
-                                                ["2021-2025", "2022-2026", "2023-2027", "Passed Out"]
-                                                    .map(semester => (
-                                                        <option key={semester} value={semester}>{semester}</option>
-                                                    ))
-                                            }
+                                            {["2021-2025", "2022-2026", "2023-2027", "Passed Out"]
+                                                .map(semester => (
+                                                    <option key={semester} value={semester}>{semester}</option>
+                                                ))}
                                         </Input>
                                         {this.state.errors.semester && <p className="error">{this.state.errors.semester}</p>}
                                     </FormGroup>
+                                        <FormGroup>
+                                            <Label for="father">Father's Name</Label>
+                                            <Input type="text" name="father" id="father" placeholder="Father's Name" onChange={this.handleChange} />
+                                            {this.state.errors.father && <p className="error">{this.state.errors.father}</p>}
+                                        </FormGroup><FormGroup>
+                                            <Label for="mother">Mother's Name</Label>
+                                            <Input type="text" name="mother" id="mother" placeholder="Mother's Name" onChange={this.handleChange} />
+                                            {this.state.errors.mother && <p className="error">{this.state.errors.mother}</p>}
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="dob">Date of Birth</Label>
+                                            <Input type="date" name="dob" id="dob" onChange={this.handleChange} />
+                                            {this.state.errors.dob && <p className="error">{this.state.errors.dob}</p>}
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="address">Address</Label>
+                                            <Input type="text" name="address" id="address" placeholder="Address" onChange={this.handleChange} />
+                                            {this.state.errors.address && <p className="error">{this.state.errors.address}</p>}
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="teampresent">Team Present</Label>
+                                            <Input type="select" name="teampresent" id="teampresent" placeholder="Team Present" onChange={this.handleChange} />
+                                            <option value="">Select Team</option>
+                                            {["Poster", "Tech", "Newsletter", "Nil"]
+                                                .map(team => (
+                                                    <option key={team} value={team}>{team}</option>
+                                                ))}
+                                            {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
+                                        </FormGroup>
+
+                                        <FormGroup>
+                                            <Label for="nnsid">NSS ID (If Any)</Label>
+                                            <Input type="text" name="nnsid" id="nnsid" placeholder="NSS ID" onChange={this.handleChange} />
+                                            {this.state.errors.nnsid && <p className="error">{this.state.errors.nnsid}</p>}
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="bg">Blood Group</Label>
+                                            <Input type="select" name="bg" id="bg" placeholder="Blood Group" onChange={this.handleChange} />
+                                            <option value="">Select Blood Group</option>
+                                            {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+                                                .map(bg => (
+                                                    <option key={bg} value={bg}>{bg}</option>
+                                                ))}
+                                            {this.state.errors.bg && <p className="error">{this.state.errors.bg}</p>}
+                                        </FormGroup>
+                                        <FormGroup>
+                                            <Label for="image">Upload Your Image</Label>
+                                            <Input type="file" name="image" id="image" onChange={this.handleImageChange} />
+                                            {this.state.errors.image && <p className="error">{this.state.errors.image}</p>}
+                                        </FormGroup>
+                                    </>
                                 )}
                                 <Button color="danger" className="signup-button w-100" type="submit">Submit</Button>
                                 <p className="text-center mt-3">
@@ -208,5 +325,8 @@ const mapDispatchToProps = (dispatch) => {
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps),
-    firestoreConnect([{ collection: 'branches' }, { collection: 'semesters', doc: 'SemesterDoc' }])
+    firestoreConnect([
+        { collection: 'branches' },
+        { collection: 'semesters' }
+    ])
 )(Signup);
