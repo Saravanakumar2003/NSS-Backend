@@ -266,7 +266,7 @@ class Signup extends React.Component {
                                         <option value="Newsletter">Newsletter</option>
                                         <option value="Technical">Technical</option>
 <option value="Nil">Nil</option>
-                                    </Input>                                     {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
+                                                                   {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
                                         </FormGroup>
 
                                         <FormGroup>
