@@ -262,11 +262,11 @@ class Signup extends React.Component {
                                             <Label for="teampresent">Team Present</Label>
                                             <Input type="select" name="teampresent" id="teampresent" placeholder="Team Present" onChange={this.handleChange} />
                                             <option value="">Select Team</option>
-                                            {["Poster", "Tech", "Newsletter", "Nil"]
-                                                .map(team => (
-                                                    <option key={team} value={team}>{team}</option>
-                                                ))}
-                                            {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
+<option value="Posters">Posters</option>
+                                        <option value="Newsletter">Newsletter</option>
+                                        <option value="Technical">Technical</option>
+<option value="Nil">Nil</option>
+                                    </Input>                                     {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
                                         </FormGroup>
 
                                         <FormGroup>
@@ -278,10 +278,15 @@ class Signup extends React.Component {
                                             <Label for="bg">Blood Group</Label>
                                             <Input type="select" name="bg" id="bg" placeholder="Blood Group" onChange={this.handleChange} />
                                             <option value="">Select Blood Group</option>
-                                            {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
-                                                .map(bg => (
-                                                    <option key={bg} value={bg}>{bg}</option>
-                                                ))}
+                                         
+<option value="A+">A+</option>
+<option value="A-">A-</option>
+<option value="B+">B+</option>
+<option value="B-">B-</option>
+<option value="AB+">AB+</option>
+<option value="AB-">AB-</option>
+<option value="O+">O+</option>
+<option value="O-">O-</option>
                                             {this.state.errors.bg && <p className="error">{this.state.errors.bg}</p>}
                                         </FormGroup>
                                         <FormGroup>
