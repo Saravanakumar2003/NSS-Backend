@@ -163,6 +163,7 @@ class Signup extends React.Component {
                                 <img src={require('../Assets/Nss.png')} alt="NSS Logo" />
                             </div>
                             <h2 className="text-center mb-4">SIGNUP PAGE</h2>
+                            <p className="text-center">This signup is only for ex & present NSS Volunteers & Teachers of Velammal Engineering College</p>
                             <Form onSubmit={this.handleSubmit}>
                                 <FormGroup>
                                     <Label for="name">Name</Label>
@@ -260,13 +261,14 @@ class Signup extends React.Component {
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="teampresent">Team Present</Label>
-                                            <Input type="select" name="teampresent" id="teampresent" placeholder="Team Present" onChange={this.handleChange} />
+                                            <Input type="select" name="teampresent" id="teampresent" placeholder="Team Present" onChange={this.handleChange}>
                                             <option value="">Select Team</option>
-<option value="Posters">Posters</option>
-                                        <option value="Newsletter">Newsletter</option>
-                                        <option value="Technical">Technical</option>
-<option value="Nil">Nil</option>
-                                                                   {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
+                                            {["Poster", "Tech", "Newsletter", "Nil"]
+                                                .map(team => (
+                                                    <option key={team} value={team}>{team}</option>
+                                                ))}
+                                            </Input>            
+                                            {this.state.errors.teampresent && <p className="error">{this.state.errors.teampresent}</p>}
                                         </FormGroup>
 
                                         <FormGroup>
@@ -276,17 +278,13 @@ class Signup extends React.Component {
                                         </FormGroup>
                                         <FormGroup>
                                             <Label for="bg">Blood Group</Label>
-                                            <Input type="select" name="bg" id="bg" placeholder="Blood Group" onChange={this.handleChange} />
+                                            <Input type="select" name="bg" id="bg" placeholder="Blood Group" onChange={this.handleChange}>
                                             <option value="">Select Blood Group</option>
-                                         
-<option value="A+">A+</option>
-<option value="A-">A-</option>
-<option value="B+">B+</option>
-<option value="B-">B-</option>
-<option value="AB+">AB+</option>
-<option value="AB-">AB-</option>
-<option value="O+">O+</option>
-<option value="O-">O-</option>
+                                            {["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"]
+                                                .map(bg => (
+                                                    <option key={bg} value={bg}>{bg}</option>
+                                                ))}
+                                            </Input>
                                             {this.state.errors.bg && <p className="error">{this.state.errors.bg}</p>}
                                         </FormGroup>
                                         <FormGroup>
