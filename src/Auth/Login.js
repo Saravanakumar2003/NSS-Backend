@@ -8,35 +8,35 @@ import { signIn } from '../Store/actions/authActions';
 import Footer from '../Components/Footer/Footer';
 import CustomAlert from '../Components/Alert';
 
-class Login extends React.Component {
-    constructor(props) {
-        super(props);
+class Login extends React.Component { 
+    constructor(props) { // Constructor with props parameter (props are properties passed to this component from its parent component or from a route in this case from react-router-dom Route component) 
+        super(props); // Super props
 
-        this.state = {
-            input: {
-                email: '',
+        this.state = { // State object
+            input: { 
+                email: '', 
                 password: ''
-            },
+            }, // Input object with email and password properties
             errors: {}
         };
     }
 
-    handleChange = (e) => {
-        const input = this.state.input;
-        const errors = this.state.errors;
-        input[e.target.id] = e.target.value;
-        errors[e.target.id] = '';
-        this.setState({ input, errors });
+    handleChange = (e) => { // Handle change function with event parameter
+        const input = this.state.input; // Input object
+        const errors = this.state.errors; // Errors object
+        input[e.target.id] = e.target.value; // Set input object property with target id as key and target value as value
+        errors[e.target.id] = ''; // Set errors object property with target id as key and empty string as value (clear error message)
+        this.setState({ input, errors }); // Set state with input and errors objects
     };
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        if (this.validate()) {
-            this.props.signIn(this.state.input);
+    handleSubmit = (e) => { // Handle submit function with event parameter
+        e.preventDefault(); // Prevent page reload
+        if (this.validate()) { // If validate function returns true
+            this.props.signIn(this.state.input); // Call signIn function with input object as parameter
         }
     };
 
-    validate() {
+    validate() { // Validate function
         let input = this.state.input;
         let errors = {};
         let isValid = true;
@@ -51,16 +51,16 @@ class Login extends React.Component {
             errors["password"] = "Please enter the password";
         }
 
-        this.setState({
-            errors: errors
-        });
+        this.setState({  // Set state with input and errors objects
+            errors: errors 
+        }); 
 
-        return isValid;
+        return isValid; 
     }
 
     render() {
-        const { auth, authError } = this.props;
-        if (auth.uid) return (<Redirect to="/"></Redirect>);
+        const { auth, authError } = this.props; // Destructure auth and authError from props
+        if (auth.uid) return (<Redirect to="/"></Redirect>); // If auth uid exists, redirect to home page 
 
         return (
             <Container fluid className="login-container">
@@ -100,17 +100,17 @@ class Login extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        auth: state.firebase.auth,
-        authError: state.auth.authError,
+const mapStateToProps = (state) => { // Map state to props
+    return { // Return object
+        auth: state.firebase.auth, // Auth property from state.firebase.auth
+        authError: state.auth.authError, // Auth error property from state.auth.authError
     };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        signIn: (creds) => dispatch(signIn(creds)),
-    };
+const mapDispatchToProps = (dispatch) => { // Map dispatch to props 
+    return { // Return object
+        signIn: (creds) => dispatch(signIn(creds)), // SignIn function with creds parameter dispatches signIn action with creds parameter 
+    }; 
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login); // Connect mapStateToProps and mapDispatchToProps to Login component and export it as default export  

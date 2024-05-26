@@ -1,3 +1,4 @@
+import { bgBG } from '@mui/material/locale';
 import { uid } from 'uid';
 
 export const signIn = (credentials) => {
@@ -48,12 +49,16 @@ export const signUp = (newUser) => {
             Branch: newUser.branch,
             userType: newUser.type,
             phone: newUser.phone,
+            address: newUser.address,
             email: newUser.email,
             gender: newUser.gender,
             semester: newUser.semester,
             father: newUser.father,
             mother: newUser.mother,
             dob: newUser.dob,
+            bg: newUser.bg,
+            teampresent: newUser.teampresent,
+            nnsid : newUser.nnsid,
             image: downloadURL
           });
         });

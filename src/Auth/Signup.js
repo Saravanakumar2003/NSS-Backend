@@ -8,11 +8,11 @@ import { compose } from 'redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import CustomAlert from '../Components/Alert';
 
-class Signup extends React.Component {
-    constructor(props) {
-        super(props);
+class Signup extends React.Component { // Signup class component with React.Component as base class 
+    constructor(props) { // Constructor with props parameter
+        super(props); // Super props
 
-        this.state = {
+        this.state = { 
             input: {
                 email: '',
                 name: '',
@@ -36,28 +36,28 @@ class Signup extends React.Component {
     }
 
     
-    handleChange = (e) => {
-        const input = this.state.input;
-        const errors = this.state.errors;
-        input[e.target.name] = e.target.value.trim();
-        errors[e.target.name] = '';
-        this.setState({ input, errors });
+    handleChange = (e) => { // Handle change function with event parameter
+        const input = this.state.input; // Input object
+        const errors = this.state.errors; // Errors object
+        input[e.target.name] = e.target.value.trim(); // Set input object property with target name as key and target value as value
+        errors[e.target.name] = ''; // Set errors object property with target name as key and empty string as value (clear error message)
+        this.setState({ input, errors }); // Set state with input and errors objects
+    }; 
+
+    handleImageChange = (e) => { // Handle image change function with event parameter
+        const input = this.state.input; // Input object
+        input['image'] = e.target.files[0]; // Set input object image property with target files array first element as value
+        this.setState({ input }); // Set state with input object
     };
 
-    handleImageChange = (e) => {
-        const input = this.state.input;
-        input['image'] = e.target.files[0];
-        this.setState({ input });
-    };
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        if (this.validate()) {
-            this.props.signUp(this.state.input);
+    handleSubmit = (e) => { // Handle submit function with event parameter
+        e.preventDefault(); // Prevent page reload
+        if (this.validate()) { // If validate function returns true
+            this.props.signUp(this.state.input); // Call signUp function with input object as parameter
         }
     };
 
-    validate = () => {
+    validate = () => { // Validate function
         let input = this.state.input;
         let errors = {};
         let isValid = true;
@@ -308,7 +308,7 @@ class Signup extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { 
     return {
         auth: state.firebase.auth,
         profile: state.firebase.profile,

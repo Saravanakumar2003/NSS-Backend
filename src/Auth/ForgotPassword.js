@@ -4,37 +4,34 @@ import { Container, Row, Col, Form, FormGroup, Label, Input, Button, Alert } fro
 import { Link } from 'react-router-dom';
 
 const ForgotPassword = () => {
-    const [email, setEmail] = useState('');
-    const [errorMessage, setErrorMessage] = useState(null);
-    const [successMessage, setSuccessMessage] = useState(null);
+    const [email, setEmail] = useState(''); // Email state
+    const [errorMessage, setErrorMessage] = useState(null); // Error message state
+    const [successMessage, setSuccessMessage] = useState(null); // Success message state
 
-    const handleForgotPassword = (event) => {
-        event.preventDefault();
+    const handleForgotPassword = (event) => { // Handle forgot password
+        event.preventDefault(); // Prevent page reload
 
         // Email validation regex
         const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
         // Validate email
         if (!emailRegex.test(email)) {
-            setErrorMessage('Invalid email address');
-            setSuccessMessage(null);
-            return;
+            setErrorMessage('Invalid email address'); // Set error message
+            setSuccessMessage(null); // Clear success message
+            return; // Exit function
         }
 
-        const firebase = getFirebase();
-        firebase.auth().sendPasswordResetEmail(email)
-            .then(() => {
-                setSuccessMessage('Password reset email sent!');
-                setErrorMessage(null);
+        const firebase = getFirebase(); // Get firebase instance
+        firebase.auth().sendPasswordResetEmail(email) // Send password reset email
+            .then(() => { // On success
+                setSuccessMessage('Password reset email sent!'); // Set success message
+                setErrorMessage(null); // Clear error message
             })
-            .catch((error) => {
-                setErrorMessage(error.message);
+            .catch((error) => { // On error
+                setErrorMessage(error.message); // Set error message
                 setSuccessMessage(null);
             });
     };
-
-
-
     return (
         <Container fluid className="login-container">
             <Row className="justify-content-center align-items-center vh-100">
