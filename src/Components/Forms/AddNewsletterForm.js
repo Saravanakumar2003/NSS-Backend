@@ -35,8 +35,8 @@ const AddNewsletterForm = ({ addNewsletter }) => {
                 <Input type="file" name="file" id="file" onChange={(e) => setFile(e.target.files[0])} />
             </FormGroup>
             <Button color="primary">Submit</Button>
-            {uploadProgress > 0 && <Progress value={uploadProgress} />}
             {uploadStatus && <p>{uploadStatus}</p>}
+            {uploadProgress > 0 && <Progress value={uploadProgress} max="100">{uploadProgress}%</Progress>}
         </Form>
     )
 }

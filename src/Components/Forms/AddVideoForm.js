@@ -23,7 +23,6 @@ const AddVideoForm = ({event, addNewVideo}) => {
     }
 
     const handleFileUpload = (file, event, name) => {
-    console.log("Uploading file:", file); 
     const currentevent = event;
     const newVideo = file;
     const title = name;
